@@ -15,7 +15,7 @@ public class Algorithm{
 	private byte delay = 100;
 	private Parser source;
 	private ArrayList<Person> currentOccupants = new ArrayList<Person>();
-	private boolean epicFail = false;
+	private volatile boolean epicFail = false;
 	
 	public Algorithm(byte numX, byte numY, float[] dist, byte del, Parser p) throws Exception{
 		if(numX <= 0 || numY <= 0)
