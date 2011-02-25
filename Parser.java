@@ -1,12 +1,12 @@
 import java.io.*;
 import java.util.*;
 
-class Parser{
+public class Parser{
 
 	Scanner file;
 	boolean[] b;
 
-	Parser(){
+	public Parser(){
 		try{
 			file = new Scanner(new File("test.txt"));
 			b = new boolean[file.nextInt()+file.nextInt()];
@@ -15,7 +15,7 @@ class Parser{
 		}
 	}
 
-	public boolean[] getNextLine() throws Exception{
+	public boolean[] getData() throws Exception{
 		for(int i = 0 ; i < b.length ; i++){
 			if(file.next().charAt(0)=='.')
 				b[i] = false;
