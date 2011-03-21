@@ -4,7 +4,9 @@ public class loltest {
 		System.out.println("this is a test");
 		StringBuilder test = new StringBuilder("o hai there");
 		System.out.println(test);
-		test.insert(test.length(), 'l');
+		int a = 2;
+		test.deleteCharAt(a);
+		test.insert(a, 'l');
 		System.out.println(test.toString());
 	}
 }

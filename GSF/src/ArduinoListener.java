@@ -2,7 +2,9 @@ import java.io.*;
 import gnu.io.*;
 
 import java.util.Enumeration;
-
+// go here for the rx tx library that is needed for this communication to work
+//this is an eclipse repo
+//http://rxtx.qbang.org/eclipse/
 
 public class ArduinoListener implements SerialPortEventListener {
 	SerialPort serialPort;

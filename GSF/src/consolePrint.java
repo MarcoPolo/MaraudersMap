@@ -1,46 +1,154 @@
 
 public class consolePrint {
+	static int borderLength=50;
 	
 	public static void main(String[] args){
-		int borderLength = 100;
 		char[] array = new char[7];
 		for(int k=0; k<7;k++){
 			array[k]=' ';
 		}
-		int l=0;
-		for (int k=0; k<100;k++, l = (int)(Math.random()*10)){
-		bound(borderLength);
-		border("Hello there this is the ASCII map of lakeside LOL", borderLength);
-		if (l>6) l-=6;
-		array[l]='*';
-		border("     ------------------------------", borderLength);
-		border("      |     |     |     | #        |", borderLength);
-		border("      |     |     |     | #  #     |", borderLength);
-		border("      |     |     |     | #        |", borderLength);
-		border("______|_ ___|__ __|___ _| "+array[4]+"  ######|", borderLength);
-		border("|      "+array[0]+" "+array[1]+"         "+array[2]+"    "+array[3]+"          |", borderLength);								
-		border("|     |___ _       ___ _           |", borderLength);								
-		border("|     |     |  "+array[5]+"  |     |          |", borderLength);								
-		border("|     |     |     |     |        # |", borderLength);								
-		border("|     |     |     |     |  "+array[6]+"     # |", borderLength);								
-		border("|     |     |     |     |          |", borderLength);								
-		border("-----------------------------------", borderLength);
-		bound(borderLength);
-		array[l]=' ';
-		try{
-		Thread.sleep(100);
-		}catch (Exception e) {
+//		int l=0;
+//		for (int k=0; k<100;k++, l = (int)(Math.random()*10)){
+//		bound(borderLength);
+//		border("Hello there this is the ASCII map of lakeside LOL", borderLength);
+//		if (l>6) l-=6;
+//		array[l]='*';
+//		border("     ------------------------------", borderLength);
+//		border("      |     |     |     | #        |", borderLength);
+//		border("      |     |     |     | #  #     |", borderLength);
+//		border("      |     |     |     | #        |", borderLength);
+////		border("______|_ ___|__ __|___ _| "+array[4]+"  ######|", borderLength);
+//		//border(modBound("______|_ ___|__ __|___ _|   ######|", array[4], 25), borderLength);
+//		border(drawLvl(0, array[4], 25), borderLength);
+//		border("|      "+array[0]+" "+array[1]+"         "+array[2]+"    "+array[3]+"          |", borderLength);								
+//		border("|     |___ _       ___ _           |", borderLength);								
+//		border("|     |     |  "+array[5]+"  |     |          |", borderLength);								
+//		border("|     |     |     |     |        # |", borderLength);								
+//		border("|     |     |     |     |  "+array[6]+"     # |", borderLength);								
+//		border("|     |     |     |     |          |", borderLength);								
+//		border("-----------------------------------", borderLength);
+//		bound(borderLength);
+//		array[l]=' ';
+//		try{
+//		Thread.sleep(100);
+//		}catch (Exception e) {
+//			// TODO: handle exception
+//		}{
+			
+//		}
+//		}
+//		
+		CartPoint point4 = new CartPoint(1,1);
+		CartPoint pointOther = new CartPoint(3,25);
+		//printLvl('*', point4);
+//		printPointMovingNicely(point4, pointOther);
+		int yDrawCoord;
+		do {
+		for(int k =0;k<=5;k++){
+			yDrawCoord=point4.getY();
+			if(k==yDrawCoord){
+				stepPointMovingNicely(point4, pointOther);
+			}else{
+				printLvl(' ', new CartPoint(2,k));
+			}
+		}
+		try {
+			Thread.sleep(100);
+		} catch (Exception e) {
 			// TODO: handle exception
-		}{
-			
 		}
-		}
-			
-		
-//		border(modBound("______|_ ___|__ __|___ _|   ######|", '*', 26),50);
+		} while(point4.getY()!=pointOther.getY() || point4.getY()!=pointOther.getY());
 		
 		//System.out.printf("\n %10s %10s", "this", "is");
 	
+	}
+	
+	public static String returnLvl(int n){
+		//This method returns the string appropriate for the current level 
+		//please note that the level pertains to each line in the ascii map
+		//also note that the level begins with the first string that has a changing string
+		//so for example the entrance to the living room because it is the first sensor on the first line
+		
+		switch (n) {
+		case 0:
+			return ("______|_ ___|__ __|___ _|    ######|");
+		case 1:
+			return ("|                                  |");
+		case 2:
+			return ("|     |___ _       ___ _           |");
+		case 3:
+			return ("|     |     |     |     |          |");
+		case 4:
+			return ("|     |     |     |     |        # |");
+		case 5:
+			return ("|     |     |     |     |        # |");
+
+		default: 
+			return("This is not an appropriate floor level, pl3ase check your calculations!");
+		}
+	}
+	
+	public static void stepPointMovingNicely(CartPoint location, CartPoint destination){
+		if(location.getX()!=destination.getX()){
+			printLvl('*',location);
+			location.setX(NumberComparer(location.getX(), destination.getX()));
+//			printLvl('*',location);
+		}else{
+			if(location.getY()!=destination.getY()){
+//				printLvl('*', location);
+				location.setY(NumberComparer(location.getY(), destination.getY()));
+				printLvl('*', location);
+			}
+		}
+	}
+	
+	public static void printPointMovingNicely(CartPoint location, CartPoint destination){
+		do {
+			printLvl('*', location);
+			location.setX(NumberComparer(location.getX(), destination.getX()));
+		} while(location.getX()!=destination.getX());
+		do {
+			printLvl('*', location);
+			location.setY(NumberComparer(location.getY(), destination.getY()));
+		} while(location.getY()!=destination.getY());
+		
+	}
+	
+	
+	public static int NumberComparer(int first, int second){
+		if (first<second){
+			return (first+1);
+		}else if(first>second){
+			return (first-1);
+		}else if(first==second){
+			return first;
+		}
+			return first;
+	}
+//	public static void recursiveNumberComparer(CartPoint aPoint, CartPoint destination, boolean CompareX){
+//		int first,second;
+//		if (CompareX){
+//			first = aPoint.getX();
+//			second = destination.getX();
+//		}else{
+//			first = aPoint.getY();
+//			second = destination.getY();
+//		}
+//		if (first<second){
+//			cartPoint
+//		//	recursiveNumberComparer(first+1, second);
+//		}else if(first>second){
+////			recursiveNumberComparer(first-1, second);
+//			printL
+//		}else if(first==second){
+//			return;
+//		}
+//	}
+	
+	public static void printLvl(char someSignal, CartPoint posOfSomeSignal){
+		String StringLvl = drawLvl(posOfSomeSignal.getX(), posOfSomeSignal.getY(), someSignal);
+		border(StringLvl);
+		//bound()
 	}
 	
 	public static void bound(int length){
@@ -53,13 +161,14 @@ public class consolePrint {
 		}
 	}
 	
-	public static String modBound(String s, char c1, int d1){
-		StringBuilder buildMe = new StringBuilder(s);
-		buildMe.insert(25, c1);
+	public static String drawLvl(int d1, int lvlNum, char c1){
+		StringBuilder buildMe = new StringBuilder(returnLvl(lvlNum));
+		buildMe.deleteCharAt(d1);
+		buildMe.insert(d1, c1);
 		return buildMe.toString();
 	}
 
-	public static void border(String s, int borderLength){
+	public static void border(String s){
 		int a=borderLength-s.length()-2;
 		String format = "| %s%"+a+"s\n";
 		System.out.printf(format, s, "|");
