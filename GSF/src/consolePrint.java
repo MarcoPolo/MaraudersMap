@@ -1,3 +1,4 @@
+import java.io.Console;
 
 public class consolePrint {
 	static int borderLength=50;
@@ -38,8 +39,8 @@ public class consolePrint {
 //		}
 //		}
 //		
-		CartPoint point4 = new CartPoint(1,1);
-		CartPoint pointOther = new CartPoint(3,25);
+		CartPoint point4 = new CartPoint(23,1);
+		CartPoint pointOther = new CartPoint(3,5);
 		//printLvl('*', point4);
 //		printPointMovingNicely(point4, pointOther);
 		int yDrawCoord;
@@ -48,19 +49,36 @@ public class consolePrint {
 			yDrawCoord=point4.getY();
 			if(k==yDrawCoord){
 				stepPointMovingNicely(point4, pointOther);
+				printLvl(' ', new CartPoint(2,(++k)));
 			}else{
 				printLvl(' ', new CartPoint(2,k));
 			}
 		}
-		try {
-			Thread.sleep(100);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		} while(point4.getY()!=pointOther.getY() || point4.getY()!=pointOther.getY());
+//			int k=0;
+//			yDrawCoord=point4.getY();
+//			while(k<yDrawCoord){
+//				printLvl(' ', new CartPoint(2,k++));
+//			}
+//			if (k==yDrawCoord){
+//				stepPointMovingNicely(point4, pointOther);
+//				k++;
+//			}
+//			while(k<6){
+//				printLvl(' ', new CartPoint(2, k++));
+//			}
+		sleep(100);
+		clearConsole();
+		} while(point4.getY()!=pointOther.getY() || point4.getX()!=pointOther.getX());
 		
 		//System.out.printf("\n %10s %10s", "this", "is");
 	
+	}
+	public static void sleep(int time){
+		try {
+			Thread.sleep(time);
+		}catch (Exception e){
+			//something happened while falling asleep
+		}
 	}
 	
 	public static String returnLvl(int n){
@@ -95,9 +113,9 @@ public class consolePrint {
 //			printLvl('*',location);
 		}else{
 			if(location.getY()!=destination.getY()){
-//				printLvl('*', location);
-				location.setY(NumberComparer(location.getY(), destination.getY()));
 				printLvl('*', location);
+				location.setY(NumberComparer(location.getY(), destination.getY()));
+//				printLvl('*', location);
 			}
 		}
 	}
@@ -172,5 +190,9 @@ public class consolePrint {
 		int a=borderLength-s.length()-2;
 		String format = "| %s%"+a+"s\n";
 		System.out.printf(format, s, "|");
+	}
+	public static void clearConsole(){
+		Console console = System.console();
+		console.flush();
 	}
 }
