@@ -1,0 +1,11 @@
+TODO
+
+3/27/11
+
+Create a listener callback to listen to sensors being broken.
+Create a reciever class to activate when so that it is triggered 
+
+reciever class
+if a person obj exist then test to see if that person makes sense to be the sensors detected person
+
+if no person obj exist create a person obj and store that speed to the persons obj 
