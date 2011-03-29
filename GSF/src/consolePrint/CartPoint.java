@@ -1,8 +1,9 @@
+package consolePrint;
 
 public class CartPoint {
 	//y is the levels
 	int x,y;
-	CartPoint(int x, int y){
+	public CartPoint(int x, int y){
 		this.x=x;
 		this.y=y;
 	}
@@ -28,9 +29,11 @@ public class CartPoint {
 	public void movePointTo(int x, int y){
 		movePointTo(new CartPoint(x,y));
 	}
-	public void moveNicelyTo(CartPoint otherpoint){
-		
+	
+	public String toString(){
+		return (  "X:"+x+"Y:"+y  );
 	}
+	
 	public void recursivePosMove(int location, int destination){
 		if (location<destination){
 			recursivePosMove(location+1, destination);
