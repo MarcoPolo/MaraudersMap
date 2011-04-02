@@ -1,8 +1,14 @@
 package arduino;
-import java.io.*;
-import gnu.io.*;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
+import gnu.io.SerialPortEvent;
+import gnu.io.SerialPortEventListener;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Enumeration;
+
+import algorithm.Listener;
 // go here for the rx tx library that is needed for this communication to work
 //this is an eclipse repo
 //http://rxtx.qbang.org/eclipse/
@@ -25,6 +31,7 @@ private static final int TIME_OUT = 2000;
 private static final int DATA_RATE = 9600;
 
 public static boolean SENSOR1, SENSOR2, SENSOR3, SENSOR4, SENSOR5, SENSOR6, SENSOR7, SENSOR8, SENSOR9, SENSOR10, SENSOR11, SENSOR12, SENSOR13, SENSOR14, SENSOR15 = false;
+public static boolean[] SENSOR = new boolean[15];
 
 public void initialize() {
 	CommPortIdentifier portId = null;
@@ -99,145 +106,148 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 			//probably should turn this into a switch
 				
 				
-				
-				
+			//code to clear the sensor values
+			for (boolean aSensor : SENSOR){
+				aSensor = false;
+			}
 				
 			//code to read the serial data	
 			if (s.indexOf("1t")!=-1){
 				System.out.println("Sensor 1 is unblocked");
-				SENSOR1=false;
+				SENSOR[1]=false;
 			}
 			if (s.indexOf("1f")!=-1){
 				System.out.println("Sensor 1 is blocked");
-				SENSOR1=true;
+				SENSOR[1]=true;
+				Listener.notifyListeners(1,true);
 			}
 			if (s.indexOf("2t")!=-1){
 				System.out.println("Sensor 2 is unblocked");
-				SENSOR2=false;
+				SENSOR[2]=false;
 			}
 			if (s.indexOf("2f")!=-1){
 				System.out.println("Sensor 2 is blocked");
-				SENSOR2=true;
+				SENSOR[2]=true;
 			}
 			
 			if (s.indexOf("3t")!=-1){
 				System.out.println("Sensor 3 is unblocked");
-				SENSOR3=false;
+				SENSOR[3]=false;
 			}
 			if (s.indexOf("3f")!=-1){
 				System.out.println("Sensor 3 is blocked");
-				SENSOR3=true;
+				SENSOR[3]=true;
 			}
 			
 			if (s.indexOf("4t")!=-1){
 				System.out.println("Sensor 4 is unblocked");
-				SENSOR4=false;
+				SENSOR[4]=false;
 			}
 			if (s.indexOf("4f")!=-1){
 				System.out.println("Sensor 4 is blocked");
-				SENSOR4=true;
+				SENSOR[4]=true;
 			}
 			
 			if (s.indexOf("5t")!=-1){
 				System.out.println("Sensor 5 is unblocked");
-				SENSOR5=false;
+				SENSOR[5]=false;
 			}
 			if (s.indexOf("5f")!=-1){
 				System.out.println("Sensor 5 is blocked");
-				SENSOR5=true;
+				SENSOR[5]=true;
 			}
 			
 			
 			if (s.indexOf("6t")!=-1){
 				System.out.println("Sensor 6 is unblocked");
-				SENSOR6=false;
+				SENSOR[6]=false;
 			}
 			if (s.indexOf("6f")!=-1){
 				System.out.println("Sensor 6 is blocked");
-				SENSOR6=true;
+				SENSOR[6]=true;
 			}
 			
 			if (s.indexOf("7t")!=-1){
 				System.out.println("Sensor 7 is unblocked");
-				SENSOR7=false;
+				SENSOR[7]=false;
 			}
 			if (s.indexOf("7f")!=-1){
 				System.out.println("Sensor 7 is blocked");
-				SENSOR7=true;
+				SENSOR[7]=true;
 			}
 			
 			if (s.indexOf("8t")!=-1){
 				System.out.println("Sensor 8 is unblocked");
-				SENSOR8=false;
+				SENSOR[8]=false;
 			}
 			if (s.indexOf("8f")!=-1){
 				System.out.println("Sensor 8 is blocked");
-				SENSOR8=true;
+				SENSOR[8]=true;
 			}
 			
 			
 			if (s.indexOf("9t")!=-1){
 				System.out.println("Sensor 9 is unblocked");
-				SENSOR9=false;
+				SENSOR[9]=false;
 			}
 			if (s.indexOf("9f")!=-1){
 				System.out.println("Sensor 9 is blocked");
-				SENSOR9=true;
+				SENSOR[9]=true;
 			}
 			
 			
 			if (s.indexOf("10t")!=-1){
 				System.out.println("Sensor 10 is unblocked");
-				SENSOR10=false;
+				SENSOR[10]=false;
 			}
 			if (s.indexOf("10f")!=-1){
 				System.out.println("Sensor 10 is blocked");
-				SENSOR10=true;
+				SENSOR[10]=true;
 			}
 			
 			if (s.indexOf("11t")!=-1){
 				System.out.println("Sensor 11 is unblocked");
-				SENSOR11=false;
+				SENSOR[11]=false;
 			}
 			if (s.indexOf("11f")!=-1){
 				System.out.println("Sensor 11 is blocked");
-				SENSOR11=true;
+				SENSOR[11]=true;
 			}
 			
 			if (s.indexOf("12t")!=-1){
 				System.out.println("Sensor 12 is unblocked");
-				SENSOR12=false;
+				SENSOR[12]=false;
 			}
 			if (s.indexOf("12f")!=-1){
 				System.out.println("Sensor 12 is blocked");
-				SENSOR12=true;
+				SENSOR[12]=true;
 			}
 			
 			if (s.indexOf("13t")!=-1){
 				System.out.println("Sensor 13 is unblocked");
-				SENSOR13=false;
+				SENSOR[13]=false;
 			}
 			if (s.indexOf("13f")!=-1){
 				System.out.println("Sensor 13 is blocked");
-				SENSOR13=true;
+				SENSOR[13]=true;
 			}
 			
 			if (s.indexOf("14t")!=-1){
 				System.out.println("Sensor 14 is unblocked");
-				SENSOR14=false;
+				SENSOR[14]=false;
 			}
 			if (s.indexOf("14f")!=-1){
 				System.out.println("Sensor 14 is blocked");
-				SENSOR14=true;
+				SENSOR[14]=true;
 			}
 			
 			if (s.indexOf("15t")!=-1){
 				System.out.println("Sensor 15 is unblocked");
-				SENSOR15=false;
+				SENSOR[15]=false;
 			}
 			if (s.indexOf("15f")!=-1){
 				System.out.println("Sensor 15 is blocked");
-				SENSOR15=true;
+				SENSOR[15]=true;
 			}
 			
 		} catch (Exception e) {
