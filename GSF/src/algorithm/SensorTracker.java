@@ -9,6 +9,7 @@ public class SensorTracker implements SignalListener{
 	int pairSensor;
 	boolean isBlocked;
 	boolean isPairBlocked;
+	boolean isDirUp;
 	double speed;
 	double deltaT;
 	double startTime;
@@ -34,8 +35,10 @@ public class SensorTracker implements SignalListener{
 		//i.e. sensor 1 and 2 are paired as well as sensor 3 and 4
 		if (sensor%2==0){
 			pairSensor=(sensor-1);
+			isDirUp = false;
 		}else{
 			pairSensor=(sensor+1);
+			isDirUp = true;
 		}
 		
 	}
@@ -67,5 +70,10 @@ public class SensorTracker implements SignalListener{
 		
 	public void calcSpeed(){
 		speed = (distancebtwnSensor/deltaT);
+	}
+	
+	//this is used to create a new person that started at this origin
+	public void createPerson(){
+		
 	}
 }

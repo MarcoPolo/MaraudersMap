@@ -19,4 +19,15 @@ public class Person{
 	public int getPrevSensor() {
 		return prevSensor;
 	}
+<<<<<<< HEAD
+=======
+
+	
+	//velocity is actually a Location object, 
+	//but it's "Location" is denoted as units of change of location per one second
+	
+	
+	public void updateVelocity(Location vel){
+	}
+>>>>>>> f7dd8d43c8cf1a103ce20fbeec1c306c93c622b9
 }
