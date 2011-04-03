@@ -37,7 +37,7 @@ public static boolean SENSOR1, SENSOR2, SENSOR3, SENSOR4, SENSOR5, SENSOR6, SENS
 public static boolean[] SENSOR = new boolean[15];
 
 public void initialize() {
-	SensorEvents sEvents = new SensorEvents();
+	new SensorEvents(); // adds self to Listeners.listeners
 	
 	CommPortIdentifier portId = null;
 	Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
@@ -113,8 +113,8 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 				
 			//code to clear the sensor values
 				
-			for (boolean aSensor : SENSOR){
-				aSensor = false;
+			for (int i = 0 ; i < SENSOR.length ; i++){
+				SENSOR[i] = false;
 			}
 			
 			//code to read the serial data	
@@ -290,8 +290,4 @@ public static void main(String[] args) throws Exception {
 	System.out.println("Started");
 }
 
-	}
-	
-	
-	
-
+}

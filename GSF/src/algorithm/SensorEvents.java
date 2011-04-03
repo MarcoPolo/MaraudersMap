@@ -17,6 +17,7 @@ public class SensorEvents implements SignalListener{
 		//this is here to make sure that the a sensorTracker isn't created if its pair already exist
 		//fix this to only use the sensors pair instead of iterating through everything
 		
+
 			if(sensorTrackers[Checker.pairNum(sensor)] != null){
 				return;
 			}
@@ -24,6 +25,11 @@ public class SensorEvents implements SignalListener{
 			if (sensorTrackers[sensor] == null ){
 				//this uses the array of trackers and creates a new tracking object for a specific sensor
 				sensorTrackers[sensor] = new SensorTracker(sensor, isBlocked);
+
+		
+		
+			if (sensorTrackers[1] != null && sensor == sensorTrackers[1].pairSensor){
+
 				return;
 			}
 			
@@ -33,5 +39,6 @@ public class SensorEvents implements SignalListener{
 			
 //		System.out.println(sensorTrackers[sensor].speed);
 	}
+}
 }
 
