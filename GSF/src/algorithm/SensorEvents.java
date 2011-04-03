@@ -18,7 +18,7 @@ public class SensorEvents implements SignalListener{
 		//fix this to only use the sensors pair instead of iterating through everything
 		
 		
-				
+		
 			if (sensorTrackers[1] != null && sensor == sensorTrackers[1].pairSensor){
 				return;
 			}

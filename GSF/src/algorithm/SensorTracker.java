@@ -19,7 +19,6 @@ public class SensorTracker implements SignalListener{
 	public double getSpeed() {
 		return speed;
 	}
-
 	
 	public double getDeltaT() {
 		return deltaT;
@@ -70,7 +69,7 @@ public class SensorTracker implements SignalListener{
 		System.err.println(speed);
 		
 	}
-		
+	
 	public void calcSpeed(){
 		speed = (distancebtwnSensor/deltaT);
 	}
