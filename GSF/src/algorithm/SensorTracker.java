@@ -4,9 +4,10 @@ package algorithm;
 public class SensorTracker implements SignalListener{
 
 	
-	double distancebtwnSensor= .01; //this is the distance between the two sensors given in meters
+	double distancebtwnSensor= 1; //this is the distance between the two sensors given in meters
 	int sensor;
 	int pairSensor;
+	boolean hasPairBeenActv;
 	boolean isBlocked;
 	boolean isPairBlocked;
 	boolean isDirUp;
@@ -24,12 +25,16 @@ public class SensorTracker implements SignalListener{
 	public double getDeltaT() {
 		return deltaT;
 	}
+	
+	public SensorTracker(){
+		
+	}
 
 	public SensorTracker(int sensor, boolean isBlocked){
 		//to start the timer
-		startTimer();
+//		startTimer();
 		this.sensor=sensor;
-		this.isBlocked=isBlocked;
+//		this.isBlocked=isBlocked;
 		//this is here to calculate the paired sensor.
 		//because each odd sensor is paired with an even one that is one higher and vice versa this holds true
 		//i.e. sensor 1 and 2 are paired as well as sensor 3 and 4
@@ -40,6 +45,7 @@ public class SensorTracker implements SignalListener{
 			pairSensor=(sensor+1);
 			isDirUp = true;
 		}
+		
 		Listener.addListener(this);
 		
 	}
@@ -48,8 +54,21 @@ public class SensorTracker implements SignalListener{
 	public void signalReceived(int sensor, boolean isBlocked) {
 		// TODO Auto-generated method stub
 		//this listener just listens to see if the pair sensor is triggered
-		if (sensor == pairSensor){
+		
+		if(this.sensor == sensor && !this.isBlocked && isBlocked){
+			this.isBlocked=isBlocked;
+			startTimer();
+		}
+		
+		
+		if (this.isBlocked && sensor == pairSensor && !hasPairBeenActv){
+			hasPairBeenActv=true;
 			stopTimer();
+		}
+		
+		if(hasPairBeenActv && pairSensor == sensor && !isBlocked ){
+			hasPairBeenActv=false;
+			isBlocked=false;
 		}
 		
 	}
@@ -68,6 +87,7 @@ public class SensorTracker implements SignalListener{
 		deltaT = ((stopTime - startTime)*Math.pow(10,-9));
 		calcSpeed();
 		System.err.println(speed);
+		
 		
 	}
 		

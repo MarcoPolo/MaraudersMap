@@ -103,7 +103,7 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 			input.read(chunk, 0, available);
 				//System.out.println("test");
 				String s = new String(chunk);
-				System.out.println(s);
+//				System.out.println(s);
 			// Displayed results are codepage dependent
 			//System.out.print(new String(chunk));
 			//int a = input.read();
@@ -118,9 +118,10 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 			}
 			
 			//code to read the serial data	
-			if (s.indexOf("1t")!=-1){
-				System.out.println("Sensor 1 is unblocked");
+			if (!(s.indexOf("1f")!=-1)){
+//				System.out.println("Sensor 1 is unblocked");
 				SENSOR[1]=false;
+				Listener.notifyListeners(1, false);
 			}
 			if (s.indexOf("1f")!=-1){
 				System.out.println("Sensor 1 is blocked");
@@ -137,22 +138,24 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 				Listener.notifyListeners(2,true);
 			}
 			
-			if (s.indexOf("3t")!=-1){
-				System.out.println("Sensor 3 is unblocked");
+			if (!(s.indexOf("3f")!=-1)){
+//				System.out.println("Sensor 3 is unblocked");
 				SENSOR[3]=false;
+				Listener.notifyListeners(3,SENSOR[3]);
 			}
 			if (s.indexOf("3f")!=-1){
 		//		System.out.println("Sensor 3 is blocked");
 				SENSOR[3]=true;
-			//	Listener.notifyListeners(3,true);
+				Listener.notifyListeners(3,SENSOR[3]);
 			}
 			
-			if (s.indexOf("4t")!=-1){
-				System.out.println("Sensor 4 is unblocked");
+			if (!(s.indexOf("4f")!=-1)){
+//				System.out.println("Sensor 4 is unblocked");
 				SENSOR[4]=false;
+				Listener.notifyListeners(4,SENSOR[4]);
 			}
 			if (s.indexOf("4f")!=-1){
-				System.out.println("Sensor 4 is blocked");
+//				System.out.println("Sensor 4 is blocked");
 				SENSOR[4]=true;
 				Listener.notifyListeners(4,true);
 			}
