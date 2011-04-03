@@ -9,9 +9,12 @@ import java.io.OutputStream;
 import java.util.Enumeration;
 
 import algorithm.Listener;
+import algorithm.SensorEvents;
+import algorithm.sensorsTrackersArray;
 // go here for the rx tx library that is needed for this communication to work
 //this is an eclipse repo
 //http://rxtx.qbang.org/eclipse/
+import algorithm.SensorTracker;
 
 public class ArduinoListener implements SerialPortEventListener {
 	SerialPort serialPort;
@@ -19,7 +22,7 @@ public class ArduinoListener implements SerialPortEventListener {
 private static final String PORT_NAMES[] = { 
 		"/dev/tty.usbserial-A9007UX1", // Mac OS X
 		"/dev/ttyUSB0", // Linux
-		"COM3", // Windows
+		"COM10" // Windows
 		};
 /** Buffered input stream from the port */
 private InputStream input;
@@ -34,6 +37,8 @@ public static boolean SENSOR1, SENSOR2, SENSOR3, SENSOR4, SENSOR5, SENSOR6, SENS
 public static boolean[] SENSOR = new boolean[15];
 
 public void initialize() {
+	SensorEvents sEvents = new SensorEvents();
+	
 	CommPortIdentifier portId = null;
 	Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 
@@ -98,7 +103,7 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 			input.read(chunk, 0, available);
 				//System.out.println("test");
 				String s = new String(chunk);
-				//System.out.println(s);
+				System.out.println(s);
 			// Displayed results are codepage dependent
 			//System.out.print(new String(chunk));
 			//int a = input.read();
@@ -107,6 +112,7 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 				
 				
 			//code to clear the sensor values
+				
 			for (boolean aSensor : SENSOR){
 				aSensor = false;
 			}
@@ -136,9 +142,9 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 				SENSOR[3]=false;
 			}
 			if (s.indexOf("3f")!=-1){
-				System.out.println("Sensor 3 is blocked");
+		//		System.out.println("Sensor 3 is blocked");
 				SENSOR[3]=true;
-				Listener.notifyListeners(3,true);
+			//	Listener.notifyListeners(3,true);
 			}
 			
 			if (s.indexOf("4t")!=-1){
@@ -191,8 +197,6 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 				SENSOR[8]=true;
 				Listener.notifyListeners(8,true);
 			}
-			
-			
 			if (s.indexOf("9t")!=-1){
 				System.out.println("Sensor 9 is unblocked");
 				SENSOR[9]=false;
@@ -202,8 +206,6 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 				SENSOR[9]=true;
 				Listener.notifyListeners(9,true);
 			}
-			
-			
 			if (s.indexOf("10t")!=-1){
 				System.out.println("Sensor 10 is unblocked");
 				SENSOR[10]=false;
@@ -243,7 +245,6 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 				SENSOR[13]=true;
 				Listener.notifyListeners(13,true);
 			}
-			
 			if (s.indexOf("14t")!=-1){
 				System.out.println("Sensor 14 is unblocked");
 				SENSOR[14]=false;
@@ -253,7 +254,6 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 				SENSOR[14]=true;
 				Listener.notifyListeners(14,true);
 			}
-			
 			if (s.indexOf("15t")!=-1){
 				System.out.println("Sensor 15 is unblocked");
 				SENSOR[15]=false;
@@ -263,7 +263,9 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 				SENSOR[15]=true;
 				Listener.notifyListeners(15,true);
 			}
-			
+		} catch (NullPointerException e){
+			System.err.println(e.getStackTrace());
+			System.exit(1);
 		} catch (Exception e) {
 			System.err.println(e.toString());
 		}

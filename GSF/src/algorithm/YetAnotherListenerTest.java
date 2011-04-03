@@ -1,18 +1,13 @@
 package algorithm;
 
-public class YetAnotherListenerTest implements SignalListener{
+public class YetAnotherListenerTest{
 
-	@Override
-	public void signalReceived(int sensor, boolean isBlocked) {
-		// TODO Auto-generated method stub
-		System.out.println("O snap the listener has been activated");
+	public static void main(String[] args) throws InterruptedException{
+		double time1 = System.nanoTime();
+		Thread.sleep(1001);
+		double time2 = System.nanoTime();
 		
+		System.out.println(((time2-time1)*Math.pow(10,-9)));
 	}
 	
-	public void addlisten(){
-		Listener.addListener(this);
-	}
-	
-	
-
 }

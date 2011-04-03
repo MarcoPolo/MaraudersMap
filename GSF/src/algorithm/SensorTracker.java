@@ -4,7 +4,7 @@ package algorithm;
 public class SensorTracker implements SignalListener{
 
 	
-	int distancebtwnSensor; //this is the distance between the two sensors given in meters
+	double distancebtwnSensor= .01; //this is the distance between the two sensors given in meters
 	int sensor;
 	int pairSensor;
 	boolean isBlocked;
@@ -40,6 +40,7 @@ public class SensorTracker implements SignalListener{
 			pairSensor=(sensor+1);
 			isDirUp = true;
 		}
+		Listener.addListener(this);
 		
 	}
 
@@ -64,8 +65,10 @@ public class SensorTracker implements SignalListener{
 	//also goes ahead and calculates the speed
 	public void stopTimer(){
 		stopTime = System.nanoTime();
-		deltaT = stopTime - startTime;
+		deltaT = ((stopTime - startTime)*Math.pow(10,-9));
 		calcSpeed();
+		System.err.println(speed);
+		
 	}
 		
 	public void calcSpeed(){
