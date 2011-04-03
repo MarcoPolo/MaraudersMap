@@ -18,4 +18,10 @@ public class Checker{
 		}
 		return false;
 	}
+	
+	public static int pairNum(int i){
+		if(i % 2 == 0)
+			return i - 1;
+		return i+1;
+	}
 }
