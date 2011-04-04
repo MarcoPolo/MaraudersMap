@@ -121,7 +121,7 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 			if (!(s.indexOf("1f")!=-1)){
 //				System.out.println("Sensor 1 is unblocked");
 				SENSOR[1]=false;
-				Listener.notifyListeners(1, false);
+//				Listener.notifyListeners(1, false);
 			}
 			if (s.indexOf("1f")!=-1){
 				System.out.println("Sensor 1 is blocked");
@@ -141,7 +141,7 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 			if (!(s.indexOf("3f")!=-1)){
 //				System.out.println("Sensor 3 is unblocked");
 				SENSOR[3]=false;
-				Listener.notifyListeners(3,SENSOR[3]);
+//				Listener.notifyListeners(3,SENSOR[3]);
 			}
 			if (s.indexOf("3f")!=-1){
 		//		System.out.println("Sensor 3 is blocked");
@@ -152,7 +152,7 @@ public synchronized void serialEvent(SerialPortEvent oEvent) {
 			if (!(s.indexOf("4f")!=-1)){
 //				System.out.println("Sensor 4 is unblocked");
 				SENSOR[4]=false;
-				Listener.notifyListeners(4,SENSOR[4]);
+//				Listener.notifyListeners(4,SENSOR[4]);
 			}
 			if (s.indexOf("4f")!=-1){
 //				System.out.println("Sensor 4 is blocked");

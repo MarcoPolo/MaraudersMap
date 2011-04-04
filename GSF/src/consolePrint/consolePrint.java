@@ -4,21 +4,19 @@ import java.io.Console;
 public class consolePrint {
 	private final static int borderLength=50;
 	private final static int defaultSpeed = 50 ;
-	
+//this class will usually not run this method but it was helpful for debugging/testing	
 	public static void main(String[] args){
 		
-		char[] array = new char[7];
-		for(int k=0; k<7;k++){
-			array[k]=' ';
-		}
 		CartPoint point4 = new CartPoint(34,5);
 		CartPoint pointOther = new CartPoint(2,2);
-		Nodes nodes = new Nodes(point4);
 		printPointMoving(point4, pointOther, defaultSpeed);
-		System.out.println(checkLeft(point4));
-		System.out.println(checkUp(point4));
-		nodes = travelUp(point4, nodes);
-		nodes.printNodes(nodes);
+		
+		//these are experimental methods to be implemented later
+//		Nodes nodes = new Nodes(point4);
+//		System.out.println(checkLeft(point4));
+//		System.out.println(checkUp(point4));
+//		nodes = travelUp(point4, nodes);
+//		nodes.printNodes(nodes);
 		
 	}
 	public static void printPointMoving(CartPoint start, CartPoint end, int speed){

@@ -30,7 +30,7 @@ public class SensorTracker implements SignalListener{
 	}
 
 	public SensorTracker(int sensor, boolean isBlocked){
-		//to start the timer
+		//to start the time
 //		startTimer();
 		this.sensor=sensor;
 //		this.isBlocked=isBlocked;
@@ -44,11 +44,13 @@ public class SensorTracker implements SignalListener{
 			pairSensor=(sensor+1);
 			isDirUp = true;
 		}
+		startTimer();
 		
-		Listener.addListener(this);
+//		Listener.addListener(this);
 		
 	}
 
+	//this is not going to be used it was very troublesome
 	@Override
 	public void signalReceived(int sensor, boolean isBlocked) {
 		// TODO Auto-generated method stub
@@ -72,17 +74,27 @@ public class SensorTracker implements SignalListener{
 		
 	}
 	
+
 	//this method will start the timing function
 	public void startTimer(){
 		startTime = System.nanoTime();
 
 	}
 	
+	
+	public double returnSpeed(SensorTracker pairSensor){
+		stopTime = pairSensor.startTime;
+		stopTimer();
+		double dir = 1;
+		if(!isDirUp) dir=-1;
+		return (dir*speed); 
+	}
+	
 	//this method will stop the timing function
 	//it calculates base of the time difference
 	//also goes ahead and calculates the speed
 	public void stopTimer(){
-		stopTime = System.nanoTime();
+//		stopTime = System.nanoTime();
 		deltaT = ((stopTime - startTime)*Math.pow(10,-9));
 		calcSpeed();
 		System.err.println(speed);
