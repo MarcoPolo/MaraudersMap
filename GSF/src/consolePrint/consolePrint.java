@@ -7,8 +7,8 @@ public class consolePrint {
 //this class will usually not run this method but it was helpful for debugging/testing	
 	public static void main(String[] args){
 		
-		CartPoint point4 = new CartPoint(34,5);
-		CartPoint pointOther = new CartPoint(2,2);
+		CartPoint point4 = new CartPoint(7,5);
+		CartPoint pointOther = new CartPoint(10,5);
 		printPointMoving(point4, pointOther, defaultSpeed);
 		
 		//these are experimental methods to be implemented later

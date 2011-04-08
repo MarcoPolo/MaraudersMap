@@ -10,6 +10,7 @@ public class Person{
 	private double defaultSpeed;
 	//this is the persons last location
 	private CartPoint lastLocation;
+	private boolean isDirUp;
 	private int prevSensor;
 	
 	
@@ -23,16 +24,41 @@ public class Person{
 		if(this.location == null){
 			this.location = location;
 			this.speed = speed;
+			if (speed > 0) isDirUp = true;
+			else isDirUp = false;
 			return;
 		}
 		lastLocation = this.location;
 		this.speed = speed;
 		this.location = location;
+		if (speed > 0) isDirUp = true;
+		else isDirUp = false;
 		drawMeMoving();
 	}
 	
 	public void drawMeMoving(){
 		drawMeMoving(lastLocation, location);
+	}
+	
+	public void isEnteringRoom(){
+		switch (location.getY()) {
+		case 7:
+			if(!isDirUp){
+				Rooms.room[0]=false;
+				Rooms.room[0]=true;
+			}
+		case 9:
+			if(!isDirUp){
+				Rooms.room[1]=false;
+			}else{
+				Rooms.room[1]=true;
+			}
+			
+			break;
+
+		default:
+			break;
+		}
 	}
 	
 	public void drawMeMoving(CartPoint lastLocation, CartPoint location){
@@ -43,7 +69,7 @@ public class Person{
 		}else{
 			speed = this.defaultSpeed;
 		}
-		consolePrint.printPointMoving(lastLocation, location, (int)speed);
+		consolePrint.printPointMoving(lastLocation, location, (int)Math.abs(speed));
 	}
 	
 	public CartPoint getPosition() {
